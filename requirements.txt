@@ -1,0 +1,4 @@
+bottle
+bottle-sqlalchemy
+pytest
+requests
