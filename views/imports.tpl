@@ -17,7 +17,15 @@
                 complete: () => {$("#importform :input").attr("disabled", false);}
             });
         });
+        $('#delete_all').click(function(){
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/import',
+                success: delete_callback
+            });
+        });
     });
+    delete_callback = (response) => {$('#ajax_delete').text(response);}
     success_callback = (response) => {$('#ajax_response').text(response.msg);}
     error_callback = (response) => {$('#ajax_response').text(response.responseText);}
 </script>
@@ -32,4 +40,6 @@
   </div>
 <input type="submit" class="btn btn-primary" value="Submit Form">
 </form>
-<p id="ajax_response" class="ml-4"></p>
+<p id="ajax_response" class="ml-4">&nbsp;</p>
+<button type="button" class="btn btn-danger ml-4 mb-3" id="delete_all">Delete all</button>
+<p id="ajax_delete" class="ml-4">&nbsp;</p>

@@ -1,7 +1,7 @@
 import datetime
 import json
 
-from bottle import post, get, request, response
+from bottle import post, get, request, response, delete
 
 from helpers import (
     get_or_create_by_required, get_by_id, import_students,
@@ -74,6 +74,17 @@ def import_file():
         response.status = 422
         result = "Bad file's format"
     return result
+
+
+@delete('/api/import')
+def delete_all(db):
+    """API Routes for deleting all"""
+    db.query(Statistic).delete()
+    db.query(Student).delete()
+    db.query(Quarter).delete()
+    db.query(Room).delete()
+    db.query(Subject).delete()
+    return 'Deleted :)'
 
 
 @get('/api/charts')
